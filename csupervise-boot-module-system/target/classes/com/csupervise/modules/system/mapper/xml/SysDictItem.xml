@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- /*
+*
+*  *
+*  *      Copyright (c) 2020-2025, leiyz All rights reserved.
+*  *
+*  *  Redistribution and use in source and binary forms, with or without
+*  *  modification, are permitted provided that the following conditions are met:
+*  *
+*  * Redistributions of source code must retain the above copyright notice,
+*  *  this list of conditions and the following disclaimer.
+*  *  Redistributions in binary form must reproduce the above copyright
+*  *  notice, this list of conditions and the following disclaimer in the
+*  *  documentation and/or other materials provided with the distribution.
+*  *  Neither the name of leiyz developer nor the names of its
+*  *  contributors may be used to endorse or promote products derived from
+*  *  this software without specific prior written permission.
+*  *  Author: leiyz (lyz88119@126.com)
+*  *
+*
+*
+*/-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csupervise.modules.system.mapper.SysDictItemMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.csupervise.modules.system.entity.SysDictItem">
+    <result column="id" property="id" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+        <result column="dict_id" property="dictId" />
+        <result column="item_text" property="itemText" />
+        <result column="item_value" property="itemValue" />
+        <result column="description" property="description" />
+        <result column="sort_order" property="sortOrder" />
+        <result column="del_flag" property="delFlag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        dict_id, item_text, item_value, description, sort_order, del_flag
+    </sql>
+
+</mapper>

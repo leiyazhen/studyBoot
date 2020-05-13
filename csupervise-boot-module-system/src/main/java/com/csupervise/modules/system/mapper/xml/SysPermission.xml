@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- /*
+*
+*  *
+*  *      Copyright (c) 2020-2025, leiyz All rights reserved.
+*  *
+*  *  Redistribution and use in source and binary forms, with or without
+*  *  modification, are permitted provided that the following conditions are met:
+*  *
+*  * Redistributions of source code must retain the above copyright notice,
+*  *  this list of conditions and the following disclaimer.
+*  *  Redistributions in binary form must reproduce the above copyright
+*  *  notice, this list of conditions and the following disclaimer in the
+*  *  documentation and/or other materials provided with the distribution.
+*  *  Neither the name of leiyz developer nor the names of its
+*  *  contributors may be used to endorse or promote products derived from
+*  *  this software without specific prior written permission.
+*  *  Author: leiyz (lyz88119@126.com)
+*  *
+*
+*
+*/-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csupervise.modules.system.mapper.SysPermissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.csupervise.modules.system.entity.SysPermission">
+    <result column="id" property="id" />
+        <result column="parent_id" property="parentId" />
+        <result column="name" property="name" />
+        <result column="url" property="url" />
+        <result column="component" property="component" />
+        <result column="menu_type" property="menuType" />
+        <result column="menu_order" property="menuOrder" />
+        <result column="icon" property="icon" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        parent_id, name, url, component, menu_type, menu_order, icon
+    </sql>
+
+</mapper>

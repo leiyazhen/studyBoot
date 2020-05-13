@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- /*
+*
+*  *
+*  *      Copyright (c) 2020-2025, leiyz All rights reserved.
+*  *
+*  *  Redistribution and use in source and binary forms, with or without
+*  *  modification, are permitted provided that the following conditions are met:
+*  *
+*  * Redistributions of source code must retain the above copyright notice,
+*  *  this list of conditions and the following disclaimer.
+*  *  Redistributions in binary form must reproduce the above copyright
+*  *  notice, this list of conditions and the following disclaimer in the
+*  *  documentation and/or other materials provided with the distribution.
+*  *  Neither the name of leiyz developer nor the names of its
+*  *  contributors may be used to endorse or promote products derived from
+*  *  this software without specific prior written permission.
+*  *  Author: leiyz (lyz88119@126.com)
+*  *
+*
+*
+*/-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csupervise.modules.system.mapper.BizDutyIntercomLogInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.csupervise.modules.system.entity.BizDutyIntercomLogInfo">
+    <result column="id" property="id" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+        <result column="log_id" property="logId" />
+        <result column="roll_call" property="rollCall" />
+        <result column="arearoll_call" property="arearollCall" />
+        <result column="report" property="report" />
+        <result column="user_id" property="userId" />
+        <result column="area_code" property="areaCode" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        create_time,
+        update_time,
+        log_id, roll_call, arearoll_call, report, user_id, area_code
+    </sql>
+
+</mapper>
