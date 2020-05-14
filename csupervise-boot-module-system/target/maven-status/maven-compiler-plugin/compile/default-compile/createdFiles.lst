@@ -18,6 +18,7 @@ com\csupervise\modules\system\service\impl\BizDutyIntercomLogInfoServiceImpl.cla
 com\csupervise\modules\system\mapper\BizDutyEquipmentLogInfoMapper.class
 com\csupervise\modules\system\controller\BizDutyInfoController.class
 com\csupervise\modules\system\service\impl\BizDutyLogInfoServiceImpl.class
+com\csupervise\modules\system\vo\UserView.class
 com\csupervise\modules\system\controller\BizDutyDetailsInfoController.class
 com\csupervise\modules\system\controller\BizNoticeInfoController.class
 com\csupervise\modules\system\service\ISysDictItemService.class
