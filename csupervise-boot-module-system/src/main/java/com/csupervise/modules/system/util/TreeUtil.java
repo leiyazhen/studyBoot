@@ -47,12 +47,12 @@ public class TreeUtil {
 
         for (T treeNode : treeNodes) {
 
-            if (root.equals(treeNode.getParentId())) {
+            if (root.toString().equals(treeNode.getParentId())) {
                 trees.add(treeNode);
             }
 
             for (T it : treeNodes) {
-                if (it.getParentId() == treeNode.getId()) {
+                if (it.getParentId().equals(treeNode.getId())) {
                     if (treeNode.getChildren() == null) {
                         treeNode.setChildren(new ArrayList<>());
                     }

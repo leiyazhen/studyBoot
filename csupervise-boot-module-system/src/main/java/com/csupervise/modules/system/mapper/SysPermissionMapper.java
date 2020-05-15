@@ -24,6 +24,8 @@ package com.csupervise.modules.system.mapper;
 import com.csupervise.modules.system.entity.SysPermission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * <p>
  * 菜单权限表 Mapper 接口
@@ -33,5 +35,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2020-05-11
  */
 public interface SysPermissionMapper extends BaseMapper<SysPermission> {
-
+    /**
+     * 角色集合查找菜单功能
+     * @param roleIds
+     * @return
+     */
+    public List<SysPermission> queryPermissionsByRoles(List<String> roleIds);
 }

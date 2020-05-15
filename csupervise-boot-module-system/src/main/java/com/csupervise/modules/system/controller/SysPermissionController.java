@@ -22,15 +22,26 @@
 package com.csupervise.modules.system.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.csupervise.common.api.vo.Result;
+import com.csupervise.modules.system.entity.SysPermission;
+import com.csupervise.modules.system.entity.SysUser;
+import com.csupervise.modules.system.entity.SysUserRole;
 import com.csupervise.modules.system.service.ISysPermissionService;
+import com.csupervise.modules.system.service.ISysUserRoleService;
+import com.csupervise.modules.system.util.TreeUtil;
 import com.csupervise.modules.system.vo.PermissionView;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -41,14 +52,25 @@ import java.util.List;
  * @since 2020-05-11
  */
 @Api(tags = "系统权限")
-@Controller
-@RequestMapping("/system/sysPermission")
+@RestController
+@RequestMapping("/sysPermission")
 public class SysPermissionController {
     @Autowired
     private ISysPermissionService permissionService;
+    @Autowired
+    private ISysUserRoleService userRoleService;
 
-    public Result<List<PermissionView>> queryPermissionByUser()
-    {
-        return null;
+    @ApiOperation("查询用户菜单功能权限")
+    @RequestMapping(value = "/query", method = RequestMethod.GET)
+    public Result<List<PermissionView>> queryPermission() {
+        SysUser currentUser = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        if (currentUser.getUsername().equals("admin")) {
+
+            return Result.success(TreeUtil.bulid(permissionService.list(new QueryWrapper<SysPermission>()).stream().map(PermissionView::new).collect(Collectors.toList()), -1));
+        }
+        QueryWrapper<SysUserRole> roleQuery = new QueryWrapper<>();
+        roleQuery.eq("user_id", currentUser.getId());
+        List<SysUserRole> userRoles = userRoleService.list(roleQuery);
+        return Result.success(TreeUtil.bulid(permissionService.queryUserPermissions(userRoles.stream().map(SysUserRole::getRoleId).collect(Collectors.toList())).stream().map(PermissionView::new).collect(Collectors.toList()), -1));
     }
 }

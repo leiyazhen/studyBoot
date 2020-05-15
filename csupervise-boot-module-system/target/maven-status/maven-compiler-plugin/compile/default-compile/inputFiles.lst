@@ -102,6 +102,7 @@ E:\workspace\studyBoot\csupervise-boot-module-system\src\main\java\com\csupervis
 E:\workspace\studyBoot\csupervise-boot-module-system\src\main\java\com\csupervise\modules\system\mapper\BizDutyEquipmentLogInfoMapper.java
 E:\workspace\studyBoot\csupervise-boot-module-system\src\main\java\com\csupervise\modules\system\controller\SysDictController.java
 E:\workspace\studyBoot\csupervise-boot-module-system\src\main\java\com\csupervise\modules\system\controller\BizDutyTelephoneLogInfoController.java
+E:\workspace\studyBoot\csupervise-boot-module-system\src\main\java\com\csupervise\modules\system\vo\PermissionView.java
 E:\workspace\studyBoot\csupervise-boot-module-system\src\main\java\com\csupervise\modules\system\service\impl\SysDictItemServiceImpl.java
 E:\workspace\studyBoot\csupervise-boot-module-system\src\main\java\com\csupervise\modules\system\entity\SysUserRole.java
 E:\workspace\studyBoot\csupervise-boot-module-system\src\main\java\com\csupervise\modules\system\mapper\BizNoticeInfoMapper.java

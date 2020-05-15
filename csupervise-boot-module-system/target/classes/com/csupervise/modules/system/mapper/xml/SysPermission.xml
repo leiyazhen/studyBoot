@@ -20,19 +20,20 @@
 *
 *
 */-->
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.csupervise.modules.system.mapper.SysPermissionMapper">
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.csupervise.modules.system.entity.SysPermission">
-    <result column="id" property="id" />
-        <result column="parent_id" property="parentId" />
-        <result column="name" property="name" />
-        <result column="url" property="url" />
-        <result column="component" property="component" />
-        <result column="menu_type" property="menuType" />
-        <result column="menu_order" property="menuOrder" />
-        <result column="icon" property="icon" />
+        <result column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="url" property="url"/>
+        <result column="component" property="component"/>
+        <result column="menu_type" property="menuType"/>
+        <result column="menu_order" property="menuOrder"/>
+        <result column="icon" property="icon"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -40,5 +41,15 @@
         id,
         parent_id, name, url, component, menu_type, menu_order, icon
     </sql>
+    <select id="queryPermissionsByRoles">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_permission p
+        join sys_role_permission r where p.id=r.role_id and p.id in #{roleIds}
+        <foreach collection="roleIds" item="roleId" index="i" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
 
+    </select>
+    >
 </mapper>

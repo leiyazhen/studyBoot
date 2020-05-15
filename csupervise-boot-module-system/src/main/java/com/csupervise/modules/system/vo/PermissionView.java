@@ -1,10 +1,12 @@
 package com.csupervise.modules.system.vo;
 
+import com.csupervise.modules.system.entity.SysPermission;
 import com.csupervise.modules.system.model.TreeNodeModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Project Name:csupervise
@@ -14,7 +16,6 @@ import java.io.Serializable;
  * Date:2020/5/14 22:45
  */
 @Data
-@AllArgsConstructor
 public class PermissionView extends TreeNodeModel implements Serializable {
     private static final long serialVersionUID = 1L;
     /**
@@ -46,4 +47,16 @@ public class PermissionView extends TreeNodeModel implements Serializable {
      * 菜单图标
      */
     private String icon;
+
+    public  PermissionView(SysPermission permission)
+    {
+        this.component=permission.getComponent();
+        this.icon=permission.getIcon();
+        this.menuOrder=permission.getMenuOrder();
+        this.menuType=permission.getMenuType();
+        this.name=permission.getName();
+        this.url=permission.getUrl();
+        this.id=permission.getId();
+        this.parentId=permission.getParentId();
+    }
 }

@@ -361,4 +361,114 @@
 | 401 | Unauthorized  ||
 | 403 | Forbidden  ||
 | 404 | Not Found  ||
+# 系统权限
+## 查询用户菜单功能权限
+
+
+**接口描述**:
+
+
+**接口地址**:`/sysPermission/query`
+
+
+**请求方式**：`GET`
+
+
+**consumes**:``
+
+
+**produces**:`["*/*"]`
+
+
+
+**请求参数**：
+暂无
+
+
+
+**响应示例**:
+
+```json
+{
+	"code": 0,
+	"data": [
+		{
+			"children": [
+				{
+					"children": [
+						{
+							"children": [
+								{}
+							],
+							"id": "",
+							"parentId": ""
+						}
+					],
+					"id": "",
+					"parentId": ""
+				}
+			],
+			"component": "",
+			"icon": "",
+			"id": "",
+			"menuOrder": 0,
+			"menuType": "",
+			"name": "",
+			"parentId": "",
+			"url": ""
+		}
+	],
+	"mesg": "",
+	"timestamp": ""
+}
+```
+
+**响应参数**:
+
+
+| 参数名称         | 参数说明                             |    类型 |  schema |
+| ------------ | -------------------|-------|----------- |
+|code|   |integer(int32)  | integer(int32)   |
+|data|   |array  | PermissionView   |
+|mesg|   |string  |    |
+|timestamp|   |string(date-time)  | string(date-time)   |
+
+
+
+**schema属性说明**
+
+
+
+
+**PermissionView**
+
+| 参数名称         | 参数说明                             |    类型 |  schema |
+| ------------ | ------------------|--------|----------- |
+|children |    |array  | TreeNodeModel   |
+|component |    |string  |    |
+|icon |    |string  |    |
+|id |    |string  |    |
+|menuOrder |    |integer(int32)  |    |
+|menuType |    |string  |    |
+|name |    |string  |    |
+|parentId |    |string  |    |
+|url |    |string  |    |
+
+**TreeNodeModel**
+
+| 参数名称         | 参数说明                             |    类型 |  schema |
+| ------------ | ------------------|--------|----------- |
+|children |    |array  | TreeNodeModel   |
+|id |    |string  |    |
+|parentId |    |string  |    |
+
+**响应状态**:
+
+
+| 状态码         | 说明                            |    schema                         |
+| ------------ | -------------------------------- |---------------------- |
+| 200 | OK  |Result«List«PermissionView»»|
+| 401 | Unauthorized  ||
+| 403 | Forbidden  ||
+| 404 | Not Found  ||
 
