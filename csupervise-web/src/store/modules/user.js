@@ -49,17 +49,17 @@ const user = {
     actions: {
         // 根据用户名登录
         LoginByUsername({ commit }, userInfo) {
-            const user = encryption({
-                data: userInfo,
-                key: '1234567887654321',
-                param: ['password']
-            })
+            // const user = encryption({
+            //     data: userInfo,
+            //     key: '1234567887654321',
+            //     param: ['password']
+            // })
             return new Promise((resolve, reject) => {
-                loginByUsername(user.username, user.password, user.code, user.randomStr).then(response => {
+                loginByUsername(userInfo.username, userInfo.password, userInfo.code, userInfo.randomStr).then(response => {
                     const data = response.data
-                    commit('SET_ACCESS_TOKEN', data.access_token)
-                    commit('SET_REFRESH_TOKEN', data.refresh_token)
-                    commit('SET_EXPIRES_IN', data.expires_in)
+                    commit('SET_ACCESS_TOKEN', data.data)
+                        // commit('SET_REFRESH_TOKEN', data.refresh_token)
+                        // commit('SET_EXPIRES_IN', data.expires_in)
                     commit('CLEAR_LOCK')
                     resolve()
                 }).catch(error => {
@@ -69,15 +69,16 @@ const user = {
         },
         GetUserInfo({ commit }) {
             return new Promise((resolve, reject) => {
-                getUserInfo().then((res) => {
-                    const data = res.data.data || {}
-                    commit('SET_USER_INFO', data)
-                    commit('SET_ROLES', data.roleList || [])
-                    commit('SET_PERMISSIONS', data.permissions || [])
-                    resolve(data)
-                }).catch((err) => {
-                    reject()
-                })
+                resolve({})
+                    // getUserInfo().then((res) => {
+                    //     const data = res.data.data || {}
+                    //     commit('SET_USER_INFO', data)
+                    //     commit('SET_ROLES', data.roleList || [])
+                    //     commit('SET_PERMISSIONS', data.permissions || [])
+                    //     resolve(data)
+                    // }).catch((err) => {
+                    //     reject()
+                    // })
             })
         },
         // 刷新token

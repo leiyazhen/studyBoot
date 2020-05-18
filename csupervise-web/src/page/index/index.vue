@@ -1,5 +1,5 @@
 <template>
-  <div class="avue-contail"
+  <div class="avue-contail theme-white"
        :class="{'avue--collapse':isCollapse}">
     <div class="avue-header">
       <!-- 顶部导航栏 -->

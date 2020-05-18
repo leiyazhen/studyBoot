@@ -1,8 +1,8 @@
 export default {
-  propsDefault: {
-    label: 'label',
-    path: 'path',
-    icon: 'icon',
-    children: 'children'
-  }
+    propsDefault: {
+        label: 'name',
+        path: 'url',
+        icon: 'icon',
+        children: 'children'
+    }
 }

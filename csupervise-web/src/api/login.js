@@ -15,19 +15,33 @@
  * Author: lengleng (wangiegie@gmail.com)
  */
 import request from '@/router/axios'
-const scope = 'server'
-
-export const loginByUsername = (username, password, code, randomStr) => {
-    const grant_type = 'password'
-
+//const scope = 'server'
+export const getCode = (url) => {
     return request({
-        url: '/auth/oauth/token',
-        headers: {
-            isToken: false,
-            'Authorization': 'Basic bmV0cGxhbjpuZXRwbGFu'
-        },
+        url: url,
+        method: 'get',
+    })
+}
+export const loginByUsername = (username, password, captcha, checkKey) => {
+    //const grant_type = 'password'
+
+    // return request({
+    //     url: '/auth/oauth/token',
+    //     headers: {
+    //         isToken: false,
+    //         'Authorization': 'Basic bmV0cGxhbjpuZXRwbGFu'
+    //     },
+    //     method: 'post',
+    //     params: { username, password, randomStr, code, grant_type, scope }
+    // })
+    return request({
+        url: '/sys/login',
+        // headers: {
+        //     isToken: false,
+        //     'Authorization': 'Basic bmV0cGxhbjpuZXRwbGFu'
+        // },
         method: 'post',
-        params: { username, password, randomStr, code, grant_type, scope }
+        data: { username, password, checkKey, captcha }
     })
 }
 

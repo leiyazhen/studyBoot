@@ -16,23 +16,23 @@ import store from './store'
 import { loadStyle } from './util/util'
 import * as urls from '@/config/env'
 import {
-  iconfontUrl,
-  iconfontVersion
+    iconfontUrl,
+    iconfontVersion
 } from '@/config/env'
 import * as filters from './filters' // 全局filter
 import './styles/common.scss'
 import basicContainer from './components/basic-container/main'
-
+import './styles/theme/white.scss';
 Vue.use(VueAxios, axios)
 
 Vue.use(ElementUI, {
-  size: 'medium',
-  menuType: 'text'
+    size: 'medium',
+    menuType: 'text'
 })
 
 Vue.use(Avue, {
-  size: 'medium',
-  menuType: 'text'
+    size: 'medium',
+    menuType: 'text'
 })
 
 Vue.use(router)
@@ -44,24 +44,24 @@ Vue.component('basicContainer', basicContainer)
 
 // 加载相关url地址
 Object.keys(urls).forEach(key => {
-  Vue.prototype[key] = urls[key]
+    Vue.prototype[key] = urls[key]
 })
 
 //加载过滤器
 Object.keys(filters).forEach(key => {
-  Vue.filter(key, filters[key])
+    Vue.filter(key, filters[key])
 })
 
 // 动态加载阿里云字体库
 iconfontVersion.forEach(ele => {
-  console.log(iconfontUrl.replace('$key', ele))
-  loadStyle(iconfontUrl.replace('$key', ele))
+    console.log(iconfontUrl.replace('$key', ele))
+    loadStyle(iconfontUrl.replace('$key', ele))
 })
 
 Vue.config.productionTip = false
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount('#app')
