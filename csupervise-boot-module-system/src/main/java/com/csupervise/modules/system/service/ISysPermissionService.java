@@ -24,6 +24,8 @@ package com.csupervise.modules.system.service;
 import com.csupervise.modules.system.entity.SysPermission;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 菜单权限表 服务类
@@ -33,5 +35,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-05-11
  */
 public interface ISysPermissionService extends IService<SysPermission> {
-
+    /**
+     * 角色集合查找菜单功能
+     * @param roleIds
+     * @return
+     */
+    List<SysPermission> queryUserPermissions(List<String> roleIds);
 }

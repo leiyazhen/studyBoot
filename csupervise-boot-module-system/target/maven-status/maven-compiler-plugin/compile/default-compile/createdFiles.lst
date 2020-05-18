@@ -13,11 +13,13 @@ com\csupervise\modules\system\service\ISysDictService.class
 com\csupervise\modules\system\service\impl\BizDutyArearollcallInfoServiceImpl.class
 com\csupervise\modules\system\entity\SysPermission.class
 com\csupervise\modules\system\mapper\BizDutyDetailsInfoMapper.class
+com\csupervise\modules\system\vo\PermissionView.class
 com\csupervise\modules\system\mapper\SysDictMapper.class
 com\csupervise\modules\system\service\impl\BizDutyIntercomLogInfoServiceImpl.class
 com\csupervise\modules\system\mapper\BizDutyEquipmentLogInfoMapper.class
 com\csupervise\modules\system\controller\BizDutyInfoController.class
 com\csupervise\modules\system\service\impl\BizDutyLogInfoServiceImpl.class
+com\csupervise\modules\system\vo\UserView.class
 com\csupervise\modules\system\controller\BizDutyDetailsInfoController.class
 com\csupervise\modules\system\controller\BizNoticeInfoController.class
 com\csupervise\modules\system\service\ISysDictItemService.class

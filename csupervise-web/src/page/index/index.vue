@@ -40,7 +40,6 @@
   import {validatenull} from '@/util/validate';
   import {calcDate} from '@/util/date.js';
   import {getStore} from '@/util/store.js';
-
   export default {
     components: {
       top,

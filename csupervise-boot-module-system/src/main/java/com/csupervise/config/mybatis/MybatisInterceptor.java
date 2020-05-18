@@ -68,19 +68,19 @@ public class MybatisInterceptor implements Interceptor {
                             field.setAccessible(false);
                         }
                     }
-                    //注入部门编码
-                    if ("sysOrgCode".equals(field.getName())) {
-                        field.setAccessible(true);
-                        Object local_sysOrgCode = field.get(parameter);
-                        field.setAccessible(false);
-                        if (local_sysOrgCode == null || local_sysOrgCode.equals("")) {
-                            // 获取登录用户信息
-                            if (sysUser != null) {
-                                field.setAccessible(true);
-                                field.set(parameter, sysUser.getOrgCode());
-                                field.setAccessible(false);
-                            }
+                    if ("updateBy".equals(field.getName())) {
+                        //获取登录用户信息
+                        if (sysUser != null) {
+                            // 登录账号
+                            field.setAccessible(true);
+                            field.set(parameter, sysUser.getUsername());
+                            field.setAccessible(false);
                         }
+                    }
+                    if ("updateTime".equals(field.getName())) {
+                        field.setAccessible(true);
+                        field.set(parameter, new Date());
+                        field.setAccessible(false);
                     }
                 } catch (Exception e) {
                 }

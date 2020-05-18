@@ -42,8 +42,8 @@ public class TreeNodeModel {
      * @since JDK 1.8
      */
     private static final long serialVersionUID = 1L;
-    protected int id;
-    protected int parentId;
+    protected String id;
+    protected String parentId;
     protected List<TreeNodeModel> children = new ArrayList<TreeNodeModel>();
 
     public void add(TreeNodeModel node) {

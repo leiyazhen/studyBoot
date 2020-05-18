@@ -35,6 +35,8 @@ import lombok.experimental.Accessors;
 import org.jeecgframework.poi.excel.annotation.Excel;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 组织机构表
@@ -54,11 +56,13 @@ public class SysDepart extends Model<SysDepart> {
     /**
      * 父机构ID
      */
+    @NotBlank(message = "所属部门不能为空")
     private String parentId;
 
     /**
      * 机构/部门名称
      */
+    @NotBlank(message = "所属部门不能为空")
     private String departName;
 
     /**

@@ -27,6 +27,8 @@ import com.csupervise.modules.system.service.ISysPermissionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 菜单权限表 服务实现类
@@ -38,4 +40,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysPermission> implements ISysPermissionService {
 
+    @Override
+    public List<SysPermission> queryUserPermissions(List<String> roleIds) {
+       return this.baseMapper.queryPermissionsByRoles(roleIds);
+    }
 }
