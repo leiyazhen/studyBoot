@@ -1,9 +1,9 @@
 <template>
   <div class="menu-wrapper">
-    <template v-for="(item,index) in menu">
+    <template v-for="item in menu">
       <el-menu-item
-        v-if="validatenull(item[childrenKey]) && vaildRoles(item)&&validType(item)"
-        :index="item[pathKey]==''?index:item[pathKey]"
+        v-if="validatenull(item[childrenKey]) && vaildRoles(item)"
+        :index="item[pathKey]"
         @click="open(item)"
         :key="item[labelKey]"
         :class="{'is-active':vaildAvtive(item)}"
@@ -13,7 +13,7 @@
       </el-menu-item>
       <el-menu-item
         v-else-if="item[childrenKey][0].menuType=='2'"
-        :index="item[pathKey]==''?index:item[pathKey]"
+        :index="item[pathKey]"
         @click="open(item)"
         :key="item[labelKey]"
         :class="{'is-active':vaildAvtive(item)}"
@@ -22,8 +22,8 @@
         <span slot="title" :alt="item[pathKey]">{{item[labelKey]}}</span>
       </el-menu-item>
       <el-submenu
-        v-else-if="!validatenull(item[childrenKey])&&vaildRoles(item)&&validType(item)"
-        :index="item[pathKey]==''?index:item[pathKey]"
+        v-else-if="!validatenull(item[childrenKey])&&vaildRoles(item)"
+        :index="item[pathKey]"
         :key="item[labelKey]"
       >
         <template slot="title">
@@ -35,7 +35,7 @@
             :index="child[pathKey],cindex"
             @click="open(child)"
             :class="{'is-active':vaildAvtive(child)}"
-            v-if="validatenull(child[childrenKey])&&validType(child)"
+            v-if="validatenull(child[childrenKey])"
             :key="child[labelKey]"
           >
             <i :class="iconList[child[iconKey]]"></i>
@@ -71,7 +71,7 @@ export default {
         "icon-shortmsg": "el-icon-chat-dot-square",
         "icon-fax": "el-icon-message",
         "icon-phone": "el-icon-mobile"
-      },
+      },    
       config: config
     };
   },
@@ -127,22 +127,21 @@ export default {
       item.meta = item.meta || {};
       return item.meta.roles ? item.meta.roles.includes(this.roles) : true;
     },
-    validType(item) {
-      console.log(item);
-      item.meta = item.meta || {};
-      return item.menuType != "2";
-    },
+    // validType(item) {
+    //   item.meta = item.meta || {};
+    //   return item.menuType != "2";
+    // },
     validatenull(val) {
       return validatenull(val);
     },
-    open(item) {
+    open(item) {  
       if (this.screen <= 1) this.$store.commit("SET_COLLAPSE");
       this.$router.$avueRouter.group = item.group;
       this.$router
         .push({
           path: this.$router.$avueRouter.getPath({
             name: item[this.labelKey],
-            src: item[this.pathKey]
+            src:  item[this.pathKey]
           }),
           query: item.query
         })

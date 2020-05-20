@@ -101,7 +101,7 @@ RouterPlugin.install = function(router, store) {
                 }
                 const isChild = children.length !== 0
                 const oRouter = {
-                    path: path,
+                    path: path ? path : "",
                     component(resolve) {
                         // 判断是否为首路由
                         if (first) {
@@ -128,7 +128,7 @@ RouterPlugin.install = function(router, store) {
                         if (first) {
                             if (!isURL(path)) oMenu[propsDefault.path] = `${path}/index`
                             return [{
-                                component(resolve) { require([`../${component}.vue`], resolve) },
+                                component(resolve) { require([`../${component}/index.vue`], resolve) },
                                 icon: icon,
                                 name: name,
                                 meta: meta,
@@ -150,6 +150,7 @@ RouterPlugin.install = function(router, store) {
             } else {
                 return aRouter
             }
+            console.log(aRouter);
         }
     }
 }

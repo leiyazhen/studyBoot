@@ -20,7 +20,7 @@
                   content="锁屏"
                   placement="bottom">
       </el-tooltip>
-      <!-- <el-tooltip v-if="showFullScren"
+      <el-tooltip v-if="showFullScren"
                   effect="dark"
                   :content="isFullScreen?'退出全屏':'全屏'"
                   placement="bottom">
@@ -28,7 +28,7 @@
           <i :class="isFullScreen?'icon-zuixiaohua':'icon-quanpingzuidahua'"
              @click="handleScreen"></i>
         </div>
-      </el-tooltip> -->
+      </el-tooltip>
       <el-dropdown>
         <span class="el-dropdown-link">
           {{userInfo.username}}

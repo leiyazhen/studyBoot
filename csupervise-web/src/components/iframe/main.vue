@@ -38,6 +38,7 @@ export default {
     },
     routerPath: function () {
       // 监听routerPath变化，改变src路径
+   
       this.urlPath = this.getUrlPath()
     }
   },
@@ -111,7 +112,7 @@ export default {
     getUrlPath: function () {
       //获取 iframe src 路径
       let url = window.location.href
-      url = url.replace('/myiframe', '')
+      url = url.replace('/myiframe', '')   
       return url
     }
   }

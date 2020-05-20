@@ -1,7 +1,7 @@
 <template>
   <div>
     <basic-container>      
-
+welcome
     </basic-container>
   </div>
 </template>

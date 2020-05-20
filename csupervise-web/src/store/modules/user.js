@@ -16,7 +16,7 @@ function addPath(ele, first) {
     }
     const icon = ele[propsDefault.icon]
     ele[propsDefault.icon] = validatenull(icon) ? menu.iconDefault : icon
-    const isChild = ele[propsDefault.children] && ele[propsDefault.children].length !== 0
+    const isChild = ele[propsDefault.children] && ele[propsDefault.children].length !== 0 && ele[propsDefault.children][0] != 2;
     if (!isChild) ele[propsDefault.children] = []
     if (!isChild && first && !isURL(ele[propsDefault.path])) {
         ele[propsDefault.path] = ele[propsDefault.path] + '/index'
@@ -138,10 +138,12 @@ const user = {
                     menu.forEach(ele => {
                         addPath(ele)
                     })
+
                     let type = obj.type
                     commit('SET_MENU', { type, menu })
                     resolve(menu)
                 })
+
             })
         }
 

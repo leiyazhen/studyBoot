@@ -797,6 +797,7 @@ export default {
   created() {
     this.$store.dispatch("GetMenu", { type: true, id: -1 }).then(data => {
       if (data.length === 0) return;
+      console.log(data)
       this.$router.$avueRouter.formatRoutes(data, true);
     });
     //this.$router.$avueRouter.formatRoutes(this.menu, true);
