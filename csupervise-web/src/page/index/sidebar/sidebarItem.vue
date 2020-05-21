@@ -1,54 +1,38 @@
 <template>
   <div class="menu-wrapper">
-    <template v-for="item in menu">
-      <el-menu-item
-        v-if="validatenull(item[childrenKey]) && vaildRoles(item)"
-        :index="item[pathKey]"
-        @click="open(item)"
-        :key="item[labelKey]"
-        :class="{'is-active':vaildAvtive(item)}"
-      >
-        <i :class="iconList[item[iconKey]]"></i>
-        <span slot="title" :alt="item[pathKey]">{{item[labelKey]}}</span>
+    <template v-for="(item,index) in menu">
+      <el-menu-item v-if="validatenull(item[childrenKey]) && vaildRoles(item)"
+                    :index="item[pathKey]+index"
+                    @click="open(item)"
+                    :key="item[labelKey]+index"
+                    :class="{'is-active':vaildAvtive(item)}">
+        <i :class="item[iconKey]"></i>
+        <span slot="title"
+              :alt="item[pathKey]">{{item[labelKey]}}</span>
       </el-menu-item>
-      <el-menu-item
-        v-else-if="item[childrenKey][0].menuType=='2'"
-        :index="item[pathKey]"
-        @click="open(item)"
-        :key="item[labelKey]"
-        :class="{'is-active':vaildAvtive(item)}"
-      >
-        <i :class="iconList[item[iconKey]]"></i>
-        <span slot="title" :alt="item[pathKey]">{{item[labelKey]}}</span>
-      </el-menu-item>
-      <el-submenu
-        v-else-if="!validatenull(item[childrenKey])&&vaildRoles(item)"
-        :index="item[pathKey]"
-        :key="item[labelKey]"
-      >
+      <el-submenu v-else-if="!validatenull(item[childrenKey])&&vaildRoles(item)"
+                  :index="item[pathKey]+index"
+                  :key="item[labelKey]+index">
         <template slot="title">
-          <i :class="iconList[item[iconKey]]"></i>
-          <span slot="title" :class="{'el-menu--display':collapse && first}">{{item[labelKey]}}</span>
+          <i :class="item[iconKey]"></i>
+          <span slot="title"
+                :class="{'el-menu--display':collapse && first}">{{item[labelKey]}}</span>
         </template>
         <template v-for="(child,cindex) in item[childrenKey]">
-          <el-menu-item
-            :index="child[pathKey],cindex"
-            @click="open(child)"
-            :class="{'is-active':vaildAvtive(child)}"
-            v-if="validatenull(child[childrenKey])"
-            :key="child[labelKey]"
-          >
-            <i :class="iconList[child[iconKey]]"></i>
+          <el-menu-item :index="child[pathKey]+cindex"
+                        @click="open(child)"
+                        :class="{'is-active':vaildAvtive(child)}"
+                        v-if="validatenull(child[childrenKey])"
+                        :key="child[labelKey]+cindex">
+            <i :class="child[iconKey]"></i>
             <span slot="title">{{child[labelKey]}}</span>
           </el-menu-item>
-          <sidebar-item
-            v-else
-            :menu="[child]"
-            :key="cindex"
-            :props="props"
-            :screen="screen"
-            :collapse="collapse"
-          ></sidebar-item>
+          <sidebar-item v-else
+                        :menu="[child]"
+                        :key="cindex"
+                        :props="props"
+                        :screen="screen"
+                        :collapse="collapse"></sidebar-item>
         </template>
       </el-submenu>
     </template>
@@ -61,17 +45,7 @@ import config from "./config.js";
 export default {
   name: "sidebarItem",
   data() {
-    return {
-      iconList: {
-        "icon-sysmanage": "el-icon-s-tools",
-        "icon-timetable": "el-icon-date",
-        "icon-dutylog": "el-icon-postcard",
-        "icon-regreport": "el-icon-edit-outline",
-        "icon-mesg": "el-icon-message-solid",
-        "icon-shortmsg": "el-icon-chat-dot-square",
-        "icon-fax": "el-icon-message",
-        "icon-phone": "el-icon-mobile"
-      },    
+    return {     
       config: config
     };
   },

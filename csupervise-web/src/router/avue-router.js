@@ -99,7 +99,7 @@ RouterPlugin.install = function(router, store) {
                 const meta = {
                     keepAlive: Number(oMenu['keepAlive']) === 1
                 }
-                const isChild = children.length !== 0
+                const isChild = children.length !== 0 && children[0].menuType != "2"
                 const oRouter = {
                     path: path ? path : "",
                     component(resolve) {
@@ -128,7 +128,7 @@ RouterPlugin.install = function(router, store) {
                         if (first) {
                             if (!isURL(path)) oMenu[propsDefault.path] = `${path}/index`
                             return [{
-                                component(resolve) { require([`../${component}/index.vue`], resolve) },
+                                component(resolve) { require([`../${component}.vue`], resolve) },
                                 icon: icon,
                                 name: name,
                                 meta: meta,

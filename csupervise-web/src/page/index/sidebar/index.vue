@@ -207,7 +207,7 @@ export default {
       //     icon: "el-icon-date",
       //     name: "排班管理",
       //     spread: false,
-      //     path: "/admin",
+      //     path: "/admin/user/index",
       //     keepAlive: "0",
       //     permission: null,
       //     type: "0",
@@ -796,8 +796,7 @@ export default {
   },
   created() {
     this.$store.dispatch("GetMenu", { type: true, id: -1 }).then(data => {
-      if (data.length === 0) return;
-      console.log(data)
+      if (data.length === 0) return;     
       this.$router.$avueRouter.formatRoutes(data, true);
     });
     //this.$router.$avueRouter.formatRoutes(this.menu, true);

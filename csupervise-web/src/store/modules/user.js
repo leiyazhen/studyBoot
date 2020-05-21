@@ -26,10 +26,42 @@ function addPath(ele, first) {
         })
     }
 }
+const iconList = {
+    "icon-sysmanage": "el-icon-s-tools",
+    "icon-timetable": "el-icon-date",
+    "icon-dutylog": "el-icon-postcard",
+    "icon-regreport": "el-icon-edit-outline",
+    "icon-mesg": "el-icon-message-solid",
+    "icon-shortmsg": "el-icon-chat-dot-square",
+    "icon-fax": "el-icon-message",
+    "icon-phone": "el-icon-mobile"
+}
+const pageList = {
+    "": "/admin",
+    "/page/user": "/admin/user/index",
+    "/page/role": "/admin/role/index",
+    "/page/dept": "/admin/dept/index",
+    "/page/dailyreceive": "/admin/dailyreceive/index",
+    "/page/emergencyreceive": "/admin/emergencyreceive/index",
+    "/page/dailyreport": "/admin/dailyreport/index",
+    "/page/emergencyreport": "/admin/emergencyreport/index",
+    "/page/mesgsend": "/admin/mesgsend/index",
+    "/page/mesgreceived": "/admin/mesgreceived/index",
+    "/page/shortmsgreceive": "/admin/shortmsgreceive/index",
+    "/page/shortmsgdraft": "/admin/shortmsgdraft/index",
+    "/page/shortmesgsend": "/admin/shortmesgsend/index",
+    "/page/shotmesgbin": "/admin/shotmesgbin/index",
+    "/page/fax": "/admin/fax/index",
+    "/page/phone": "/admin/phone/index",
+    "/page/knowledge": "/admin/knowledge/index",
+    "/page/dutylog": "/admin/dutylog/index",
+    "/page/timetable": "/admin/timetable/index",
 
+
+}
 const user = {
     state: {
-        userInfo: {},
+        userInfo: { "userId": 2, "username": "admin", "accountName": "管理员", "password": "$2a$10$QOfWxxFyAMmEEmnuw9UI/..1s4B4eF/u9PzE2ZaGO.ij9YfmcUy.u", "newPassword": null, "salt": "", "wxOpenid": "", "qqOpenid": "", "createTime": "2020-04-27 11:51:00", "updateTime": "2020-04-27 11:51:00", "delFlag": "0", "phone": "", "avatar": "", "areaCode": "4406", "areaName": "佛山市", "tenantId": 1, "deptId": 1, "deptName": "超级管理员", "lockFlag": "0", "roleList": [{ "roleName": "管理员", "userId": null, "roleCode": "ROLE_ADMIN", "roleDesc": "管理员角色", "roleId": 4, "tenantId": null, "createTime": null, "updateTime": null, "userIdArray": null, "menuTree": null, "menuIdArray": null }], "permissions": [] },
         permissions: {},
         roles: [],
         menu: getStore({
@@ -134,11 +166,33 @@ const user = {
             return new Promise(resolve => {
                 getMenu(obj.id).then((res) => {
                     const data = res.data.data
+                        //递归遍历实现                   
+                    var recursiveFunction = function() {
+                        const getStr = function(list) {
+                            list.forEach(function(row) {
+                                row.spread = false;
+                                row.permission = null;
+                                row.label = row.name;
+                                if (row.parentId != -1) {
+                                    delete row.name;
+                                }
+                                row.icon = iconList[row.icon];
+                                row.path = pageList[row.url];
+                                if (row.children.length > 0 && row.children[0].menuType != 2) {
+                                    getStr(row.children);
+                                } else {
+                                    row.hasChildren = null;
+                                    delete row.children;
+                                }
+                            });
+                        };
+                        getStr(data);
+                    };
+                    recursiveFunction();
                     let menu = deepClone(data)
                     menu.forEach(ele => {
                         addPath(ele)
                     })
-
                     let type = obj.type
                     commit('SET_MENU', { type, menu })
                     resolve(menu)
