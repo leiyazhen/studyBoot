@@ -73,7 +73,28 @@ public class SysUserController {
             return sysUserService.saveUser(user, view.getSelectDeparts(), view.getSelectRoles());
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-           return Result.fail("操作失败");
+            return Result.fail("操作失败");
+        }
+    }
+
+    @ApiOperation("编辑用户")
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public Result edit(@RequestBody UserView view) {
+        try {
+            SysUser user = new SysUser();
+            BeanUtils.copyProperties(view, user);
+            user.setCreateTime(new Date());
+            user.setUpdateTime(new Date());
+            String salt = oConvertUtils.randomGen(8);
+            user.setSalt(salt);
+            String passwordEncode = PasswordUtil.encrypt(user.getUsername(), user.getPassword(), salt);
+            user.setPassword(passwordEncode);
+            user.setStatus("1");
+            user.setDelFlag(CommonConstant.DEL_FLAG_0);
+            return sysUserService.saveUser(user, view.getSelectDeparts(), view.getSelectRoles());
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return Result.fail("操作失败");
         }
     }
 }

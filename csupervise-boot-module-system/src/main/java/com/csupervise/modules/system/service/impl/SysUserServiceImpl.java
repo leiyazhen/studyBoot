@@ -21,6 +21,7 @@
  */
 package com.csupervise.modules.system.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.csupervise.common.api.vo.Result;
 import com.csupervise.common.util.UUIDGenerator;
@@ -40,6 +41,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * <p>
@@ -56,6 +59,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private SysUserDepartMapper sysUserDepartMapper;
     @Autowired
     private SysUserRoleMapper sysUserRoleMapper;
+    @Autowired
+    private SysUserMapper userMapper;
 
     @Override
     public Set<String> queryUserRoles(String username) {
@@ -70,7 +75,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Result saveUser(SysUser user, String selectDeparts, String selectRoles) {
         this.save(user);
         if (oConvertUtils.isNotEmpty(selectRoles)) {
@@ -88,5 +93,52 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             }
         }
         return Result.success("添加用户成功");
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Result editUser(SysUser user, String selectDeparts, String selectRoles) {
+        if (oConvertUtils.isEmpty(user.getId())) {
+            return Result.fail("找不到相关资源.");
+        }
+        this.updateById(user);
+        if (oConvertUtils.isNotEmpty(selectRoles)) {
+            String[] arr = selectRoles.split(",");
+            QueryWrapper<SysUserRole> queryUserRole = new QueryWrapper<SysUserRole>();
+            queryUserRole.eq("user_id", user.getId());
+            queryUserRole.in("role_id",
+                    Stream.of(arr).filter(x -> oConvertUtils.isNotEmpty(x)).collect(Collectors.toList()));
+            sysUserRoleMapper.delete(queryUserRole);
+            for (String roleId : arr) {
+                if (oConvertUtils.isNotEmpty(roleId)) {
+                    SysUserRole userRole = new SysUserRole(UUIDGenerator.generate(), user.getId(), roleId);
+                    sysUserRoleMapper.insert(userRole);
+                }
+            }
+        }
+        if (oConvertUtils.isNotEmpty(selectDeparts)) {
+            String[] arr = selectDeparts.split(",");
+            QueryWrapper<SysUserDepart> queryUserDepart =
+                    new QueryWrapper<SysUserDepart>();
+            queryUserDepart.eq("user_id", user.getId());
+            queryUserDepart.in("depart_id",
+                    Stream.of(arr).filter(x -> oConvertUtils.isNotEmpty(x)).collect(Collectors.toList()));
+            sysUserDepartMapper.delete(queryUserDepart);
+
+            for (String deaprtId : arr) {
+                if (oConvertUtils.isNotEmpty(deaprtId)) {
+                    SysUserDepart userDeaprt = new SysUserDepart(UUIDGenerator.generate(), user.getId(), deaprtId);
+                    sysUserDepartMapper.insert(userDeaprt);
+                }
+            }
+        }
+        return Result.success("编辑用户成功");
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Result deleteUser(String uid) {
+        userMapper.deleteById(uid);
+        return null;
     }
 }
